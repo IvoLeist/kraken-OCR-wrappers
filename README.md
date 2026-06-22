@@ -84,6 +84,19 @@ make install-kernel-support
 make convert-colab-script-to-notebook
 ```
 
+## GitHub Pages
+
+The repository includes a GitHub Pages workflow that publishes a Zensical-inspired docs shell and renders the sample segmentation diff during the build.
+
+To preview the same site locally:
+
+```bash
+make pages-build
+python3 -m http.server --directory build/pages 8000
+```
+
+The published landing page is the docs-style index, and the main content frame loads the generated `segmentation-diff.html` report.
+
 ## Examples and outputs
 
 Example inputs are in `example_input/`. Generated example outputs and a pre-built segmentation diff HTML are in `output/` for quick review.

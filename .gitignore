@@ -17,6 +17,8 @@ output/**
 *.local-backup/
 *.local-restore-tmp/
 
+build/
+
 .venv-kraken-ocr/
 
 .DS_Store
