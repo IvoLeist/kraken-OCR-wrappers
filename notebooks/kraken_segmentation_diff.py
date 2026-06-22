@@ -7,13 +7,18 @@ from IPython.display import IFrame, display
 # %%
 # Project paths
 
-OUTPUT_DIR = Path("output")
+PROJECT_ROOT = Path.cwd()
+
+if PROJECT_ROOT.name == "notebooks":
+    PROJECT_ROOT = PROJECT_ROOT.parent
+
+OUTPUT_DIR = PROJECT_ROOT / "output"
 
 KRAKEN_ENV_NAME = "kraken-ocr"
-KRAKEN_VENV = Path(f".venv-{KRAKEN_ENV_NAME}")
+KRAKEN_VENV = PROJECT_ROOT / f".venv-{KRAKEN_ENV_NAME}"
 
-SEG_WRAPPER = Path("scripts/kraken_segment_wrapper.sh")
-SEG_DIFF_SCRIPT = Path("scripts/segmentation_diff/create_seg_diff.py")
+SEG_WRAPPER = PROJECT_ROOT / "scripts/kraken_segment_wrapper.sh"
+SEG_DIFF_SCRIPT = PROJECT_ROOT / "scripts/segmentation_diff/create_seg_diff.py"
 
 SEG_INPUT = OUTPUT_DIR / "input_bw.png"
 
