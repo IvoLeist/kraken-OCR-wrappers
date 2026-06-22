@@ -39,12 +39,13 @@ BIN_HIGH ?= 90
 
 # Segment options
 SEG_INPUT ?= $(BIN_OUT)
+SEG_OUT_DIR ?= $(OUTPUT_DIR)/boxes_segmentation
 SEG_WRAPPER ?= scripts/kraken_segment_wrapper.sh
 
 # Output XML formats for multi-format segmentation.
 #SEG_OUT_FORMATS ?= native
-#SEG_OUT_FORMATS ?= alto,abby,pagexml,hocr,native
 SEG_OUT_FORMATS ?= alto,abbyy,pagexml,hocr,native
+#SEG_OUT_FORMATS ?= alto,abbyy
 
 # boxes | baseline
 SEGMENTER ?= boxes
@@ -132,6 +133,12 @@ check-segment-input:
 	fi
 
 segment: check-segment-input
+	mkdir -p "$(SEG_OUT_DIR)"
 	$(MAKE) run-kraken \
 		CMD=bash \
-		KRAKEN_ARGS="$(SEG_WRAPPER) $(SEG_INPUT) $(SEG_OUT_FORMATS) $(SEG_ARGS)"
+		KRAKEN_ARGS="$(SEG_WRAPPER) $(SEG_INPUT) $(SEG_OUT_DIR) $(SEG_OUT_FORMATS) $(SEG_ARGS)"
+
+seg-neural-baseline:
+	$(MAKE) segment \
+		SEG_OUT_DIR="$(OUTPUT_DIR)/baseline_segmentation" \
+		SEG_ARGS="--baseline --text-direction $(SEG_TEXT_DIRECTION)"

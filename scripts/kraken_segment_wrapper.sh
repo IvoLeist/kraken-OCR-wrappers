@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-if [[ $# -lt 1 ]]; then
-    echo "Usage: $0 INPUT_IMAGE [OUT_FORMATS] [segment options...]"
-    echo "Example: $0 output/input_bw.png alto,abbyy --boxes --text-direction horizontal-lr"
+if [[ $# -lt 2 ]]; then
+    echo "Usage: $0 INPUT_IMAGE OUTPUT_DIR [OUT_FORMATS] [segment options...]"
+    echo "Example: $0 output/input_bw.png output/segments alto,abbyy --boxes --text-direction horizontal-lr"
     echo ""
     echo "Supported output formats:"
     echo "  hocr    -> HTML"
@@ -15,12 +15,15 @@ if [[ $# -lt 1 ]]; then
 fi
 
 input="$1"
-shift
+output_dir="$2"
+shift 2
 
 if [[ ! -f "$input" ]]; then
     echo "Input image does not exist: $input"
     exit 1
 fi
+
+mkdir -p "$output_dir"
 
 # Default output formats.
 out_formats="native,alto,abbyy,pagexml,hocr"
@@ -40,7 +43,8 @@ fi
 
 IFS=',' read -r -a formats <<< "$out_formats"
 
-basename="${input%.*}"
+input_name="$(basename "$input")"
+basename="${input_name%.*}"
 
 for format in "${formats[@]}"; do
     # Trim possible whitespace around comma-separated values.
@@ -79,7 +83,7 @@ for format in "${formats[@]}"; do
             ;;
     esac
 
-    output="${basename}_${output_format_name}.${extension}"
+    output="${output_dir}/${basename}_${output_format_name}.${extension}"
 
     echo "Creating ${output}..."
 
