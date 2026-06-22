@@ -1,0 +1,12 @@
+.segmentation-diff-frame {
+    width: 100%;
+    min-height: 82vh;
+    border: 1px solid rgba(18, 33, 47, 0.12);
+    border-radius: 1rem;
+    background: #fff;
+}
+
+.segmentation-diff-note {
+    color: var(--md-default-fg-color--light, #5b6572);
+    margin-top: 1rem;
+}

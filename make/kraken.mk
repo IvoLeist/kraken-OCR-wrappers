@@ -55,7 +55,9 @@ SEG_ARGS := --$(SEGMENTER) --text-direction $(SEG_TEXT_DIRECTION)
 SEG_BASELINE_DIR ?= $(OUTPUT_DIR)/baseline_segmentation
 SEG_BOXES_DIR ?= $(OUTPUT_DIR)/boxes_segmentation
 SEG_DIFF_HTML ?= $(OUTPUT_DIR)/segmentation_diff.html
-PAGES_DIR ?= build/pages
+PAGES_DIFF_HTML ?= docs/segmentation-diff.html
+PAGES_SITE_DIR ?= site
+ZENSCICAL_BIN ?= $(shell command -v zensical 2>/dev/null)
 
 VERBOSE_FLAGS := $(shell i=0; while [ $$i -lt $(KRAKEN_VERBOSE) ]; do printf -- "-v "; i=$$((i+1)); done)
 
@@ -157,12 +159,14 @@ seg-diff-html:
 	@echo "Open: $(SEG_DIFF_HTML)"
 
 pages-build:
-	mkdir -p "$(PAGES_DIR)"
-	cp docs/index.html "$(PAGES_DIR)/index.html"
-	cp docs/styles.css "$(PAGES_DIR)/styles.css"
-	touch "$(PAGES_DIR)/.nojekyll"
-	$(MAKE) seg-diff-html SEG_DIFF_HTML="$(PAGES_DIR)/segmentation-diff.html"
-	@echo "Built GitHub Pages site in $(PAGES_DIR)"
+	@if [ -z "$(ZENSCICAL_BIN)" ]; then \
+		echo "zensical was not found in PATH."; \
+		echo "Install it first, for example with: pip install zensical"; \
+		exit 1; \
+	fi
+	$(MAKE) seg-diff-html SEG_DIFF_HTML="$(PAGES_DIFF_HTML)"
+	"$(ZENSCICAL_BIN)" build --clean
+	@echo "Built GitHub Pages site in $(PAGES_SITE_DIR)"
 
 pages-serve: pages-build
-	python3 -m http.server --directory "$(PAGES_DIR)" 8000
+	"$(ZENSCICAL_BIN)" serve

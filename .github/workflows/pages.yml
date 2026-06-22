@@ -20,23 +20,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
+      - name: Install Zensical
+        run: pip install zensical
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
       - name: Build Pages site
-        run: make pages-build PAGES_DIR=build/pages
+        run: make pages-build
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: build/pages
+          path: site
 
   deploy:
     environment:

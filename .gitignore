@@ -8,6 +8,7 @@ output/**
 !output/
 !output/README.md
 !output/segmentation_diff.html
+site/
 
 # Local environment config
 .env

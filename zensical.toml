@@ -1,0 +1,4 @@
+[project]
+site_name = "Kraken OCR wrappers"
+site_url = "https://ivoleist.github.io/kraken-OCR-wrappers/"
+extra_css = ["stylesheets/extra.css"]
