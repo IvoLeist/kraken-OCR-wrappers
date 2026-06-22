@@ -1,0 +1,45 @@
+# local | docker
+RUN_METHOD ?= local
+
+# uv | conda
+# Only relevant when RUN_METHOD=local
+USED_ENV ?= uv
+
+KRAKEN_ENV_NAME ?= kraken-ocr
+KRAKEN_DOCKER_IMAGE ?= local/kraken-ocr:latest
+DOCKER_BIN ?= $(shell command -v docker 2>/dev/null)
+CONDA_BIN ?= $(shell command -v mamba 2>/dev/null || command -v conda 2>/dev/null)
+
+# Arguments passed to kraken.
+# Example:
+#   make local-kraken-run KRAKEN_ARGS="--version"
+#   make local-kraken-run KRAKEN_ARGS="-i input.png output.txt ocr -m model.mlmodel"
+KRAKEN_ARGS ?= --help
+
+.PHONY: kraken kraken-local kraken-docker
+
+kraken:
+ifeq ($(RUN_METHOD),local)
+	$(MAKE) kraken-local
+else ifeq ($(RUN_METHOD),docker)
+	$(MAKE) kraken-docker
+else
+	$(error Unsupported KRAKEN_RUN_METHOD='$(KRAKEN_RUN_METHOD)'. Use local or docker)
+endif
+
+kraken-local:
+ifeq ($(USED_ENV),uv)
+	.venv-$(KRAKEN_ENV_NAME)/bin/kraken $(KRAKEN_ARGS)
+else ifeq ($(USED_ENV),conda)
+	$(CONDA_BIN) run -n $(KRAKEN_ENV_NAME) kraken $(KRAKEN_ARGS)
+else
+	$(error Unsupported KRAKEN_LOCAL_METHOD='$(KRAKEN_LOCAL_METHOD)'. Use uv or conda)
+endif
+
+kraken-docker: check-docker-bin
+	$(DOCKER_BIN) run --rm \
+		-v "$$(pwd):/work" \
+		-w /work \
+		$(KRAKEN_DOCKER_IMAGE) \
+		kraken $(KRAKEN_ARGS)
+

@@ -1,0 +1,19 @@
+# Colab / local input data
+example_input/**
+!example_input/
+!example_input/README.md
+
+# Generated outputs
+output/**
+!output/
+!output/README.md
+
+# Local environment config
+.env
+.colab.env
+
+# Local migration backups
+*.local-backup/
+*.local-restore-tmp/
+
+.venv-kraken-ocr/
