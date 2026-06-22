@@ -17,6 +17,9 @@ NOTEBOOKS_DIR := $(PROJECT_ROOT)/notebooks
 SEGMENTATION_NB_PY_SCRIPT := $(NOTEBOOKS_DIR)/kraken_segmentation_diff.py
 SEGMENTATION_NB := $(NOTEBOOKS_DIR)/nb_kraken_segmentation_diff.ipynb
 
+SEG_COLAB_NB_PY_SCRIPT := $(NOTEBOOKS_DIR)/colab_kraken_segmentation_diff.py
+SEG_COLAB_NB := $(NOTEBOOKS_DIR)/colab_kraken_segmentation_diff.ipynb
+
 .PHONY: help
 .PHONY: check-uv check-venv
 .PHONY: install-kernel-support register-kernel setup-vscode-kernel
@@ -90,3 +93,7 @@ convert-py-script-to-notebook:
 	@echo "Converting Python script to Jupyter notebook..."
 	uvx jupytext --to ipynb "$(SEGMENTATION_NB_PY_SCRIPT)" --output "$(SEGMENTATION_NB)"
 	@echo "Notebook created: $(SEGMENTATION_NB)"
+
+convert-colab-script-to-notebook: convert-py-script-to-notebook
+	@echo "Notebook ready for Colab: $(SEG_COLAB_NB)"
+	uvx jupytext --to ipynb "$(SEG_COLAB_NB_PY_SCRIPT)" --output "$(SEG_COLAB_NB)"

@@ -17,3 +17,5 @@ output/**
 *.local-restore-tmp/
 
 .venv-kraken-ocr/
+
+.DS_Store
