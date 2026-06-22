@@ -17,8 +17,8 @@ NOTEBOOKS_DIR := $(PROJECT_ROOT)/notebooks
 SEGMENTATION_NB_PY_SCRIPT := $(NOTEBOOKS_DIR)/kraken_segmentation_diff.py
 SEGMENTATION_NB := $(NOTEBOOKS_DIR)/nb_kraken_segmentation_diff.ipynb
 
-SEG_COLAB_NB_PY_SCRIPT := $(NOTEBOOKS_DIR)/colab_kraken_segmentation_diff.py
-SEG_COLAB_NB := $(NOTEBOOKS_DIR)/colab_kraken_segmentation_diff.ipynb
+SEG_COLAB_NB_PY_SCRIPT := $(NOTEBOOKS_DIR)/colab3_kraken_seg_diff.py
+SEG_COLAB_NB := $(NOTEBOOKS_DIR)/colab3_kraken_segmentation_diff.ipynb
 
 .PHONY: help
 .PHONY: check-uv check-venv
