@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Kraken segmentation diff</title>
+<style>
+{{ CSS }}
+</style>
+<script>
+function openTab(event, tabId) {
+    const panels = document.querySelectorAll(".tab-panel");
+    const buttons = document.querySelectorAll(".tab-button");
+
+    panels.forEach(panel => {
+        panel.style.display = "none";
+    });
+
+    buttons.forEach(button => {
+        button.classList.remove("active");
+    });
+
+    document.getElementById(tabId).style.display = "block";
+    event.currentTarget.classList.add("active");
+}
+</script>
+</head>
+<body>
+<div class="header">
+<h1>Kraken segmentation diff</h1>
+<p>
+Comparing <code>{{ BASELINE_DIR }}</code>
+against <code>{{ BOXES_DIR }}</code>.
+</p>
+</div>
+
+<nav class="tabs">
+{{ TAB_BUTTONS }}
+</nav>
+
+{{ TAB_PANELS }}
+
+</body>
+</html>

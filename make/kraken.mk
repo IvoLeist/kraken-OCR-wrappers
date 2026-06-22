@@ -52,6 +52,10 @@ SEGMENTER ?= boxes
 SEG_TEXT_DIRECTION ?= horizontal-lr
 SEG_ARGS := --$(SEGMENTER) --text-direction $(SEG_TEXT_DIRECTION)
 
+SEG_BASELINE_DIR ?= $(OUTPUT_DIR)/baseline_segmentation
+SEG_BOXES_DIR ?= $(OUTPUT_DIR)/boxes_segmentation
+SEG_DIFF_HTML ?= $(OUTPUT_DIR)/segmentation_diff.html
+
 VERBOSE_FLAGS := $(shell i=0; while [ $$i -lt $(KRAKEN_VERBOSE) ]; do printf -- "-v "; i=$$((i+1)); done)
 
 ifeq ($(KRAKEN_RAISE_ON_ERROR),yes)
@@ -142,3 +146,11 @@ seg-neural-baseline:
 	$(MAKE) segment \
 		SEG_OUT_DIR="$(OUTPUT_DIR)/baseline_segmentation" \
 		SEG_ARGS="--baseline --text-direction $(SEG_TEXT_DIRECTION)"
+
+
+seg-diff-html:
+	python scripts/segmentation_diff/create_seg_diff.py \
+		"$(SEG_BASELINE_DIR)" \
+		"$(SEG_BOXES_DIR)" \
+		"$(SEG_DIFF_HTML)"
+	@echo "Open: $(SEG_DIFF_HTML)"
