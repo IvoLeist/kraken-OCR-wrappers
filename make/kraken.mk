@@ -44,7 +44,7 @@ SEG_WRAPPER ?= scripts/kraken_segment_wrapper.sh
 # Output XML formats for multi-format segmentation.
 #SEG_OUT_FORMATS ?= native
 #SEG_OUT_FORMATS ?= alto,abby,pagexml,hocr,native
-SEG_OUT_FORMATS ?= alto,abby
+SEG_OUT_FORMATS ?= alto,abbyy,pagexml,hocr,native
 
 # boxes | baseline
 SEGMENTER ?= boxes
@@ -132,11 +132,6 @@ check-segment-input:
 	fi
 
 segment: check-segment-input
-	$(MAKE) run-kraken \
-		CMD=bash \
-		KRAKEN_ARGS="$(SEG_WRAPPER) $(SEG_INPUT) $(SEG_OUT_FORMATS) $(SEG_ARGS)"
-
-seg: check-segment-input
 	$(MAKE) run-kraken \
 		CMD=bash \
 		KRAKEN_ARGS="$(SEG_WRAPPER) $(SEG_INPUT) $(SEG_OUT_FORMATS) $(SEG_ARGS)"
