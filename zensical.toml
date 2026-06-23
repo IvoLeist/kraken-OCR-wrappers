@@ -2,3 +2,9 @@
 site_name = "Kraken OCR wrappers"
 site_url = "https://ivoleist.github.io/kraken-OCR-wrappers/"
 extra_css = ["stylesheets/extra.css"]
+copyright = """
+© 2026 Ivo Christopher Leist. This collection of
+<a href="https://github.com/mittagessen/kraken" target="_blank" rel="noopener">kraken</a>
+is not affiliated with, endorsed by, or maintained by the
+<a href="https://kraken.re" target="_blank" rel="noopener">kraken project</a> 
+"""

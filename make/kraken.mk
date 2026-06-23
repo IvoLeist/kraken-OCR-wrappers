@@ -27,7 +27,7 @@ OUTPUT_DIR ?= output
 BIN_SUFFIX ?= _bw
 BIN_OUT ?= $(OUTPUT_DIR)/$(BIN_INPUT_FILE:.jpg=$(BIN_SUFFIX).png)
 
-# Binarize options
+# Binarise options
 BIN_THRESHOLD ?= 0.5
 BIN_ZOOM ?= 0.5
 BIN_ESCALE ?= 1.0
@@ -127,7 +127,7 @@ binarise: check-binarise-input
 		echo "Binarization failed, output file was not created: $(BIN_OUT)"; \
 		exit 1; \
 	fi
-	@echo "Binarized image created: $(BIN_OUT)"
+	@echo "Binarised image created: $(BIN_OUT)"
 
 check-segment-input:
 	@if [ -z "$(BIN_INPUT)" ]; then \

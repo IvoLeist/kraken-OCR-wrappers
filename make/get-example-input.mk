@@ -31,7 +31,7 @@ local-kraken-data-info:
 	@echo "Example image:"
 	@echo "  $(KRAKEN_EXAMPLE_IMAGE)"
 	@echo ""
-	@echo "Example binarized image:"
+	@echo "Example binarised image:"
 	@echo "  $(KRAKEN_EXAMPLE_BINARIZED)"
 
 check-download-bin:

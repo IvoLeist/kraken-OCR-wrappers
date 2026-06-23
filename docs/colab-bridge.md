@@ -20,8 +20,8 @@ output/
 In Colab bridge mode, these folders point to Google Drive folders, for example:
 
 ```text
-example_input -> /Users/ivo/Google Drive/My Drive/colab_bridge/kraken-ocr/example_input
-output        -> /Users/ivo/Google Drive/My Drive/colab_bridge/kraken-ocr/output
+example_input -> /Users/user/Google Drive/My Drive/colab_bridge/kraken-ocr/example_input
+output        -> /Users/user/Google Drive/My Drive/colab_bridge/kraken-ocr/output
 ```
 
 Inside Google Colab, the same Drive location is available at:
@@ -36,7 +36,7 @@ Create a local `.env` file in the repository root:
 
 ```dotenv
 # Local macOS path to the Google Drive-synced bridge folder
-LOCAL_COLAB_BRIDGE_TARGET=/Users/ivo/Google Drive/My Drive/colab_bridge/kraken-ocr
+LOCAL_COLAB_BRIDGE_TARGET=/Users/user/Google Drive/My Drive/colab_bridge/kraken-ocr
 
 # Colab path to the Google Drive-synced bridge folder
 REMOTE_COLAB_BRIDGE=/content/drive/MyDrive/colab_bridge/kraken-ocr

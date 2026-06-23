@@ -50,7 +50,7 @@ make run-kraken \
   KRAKEN_ARGS="scripts/kraken_segment_wrapper.sh output/input_bw.png alto,abbyy --boxes --text-direction horizontal-lr"
 ```
 
-## Binarize an image
+## Binarise an image
 
 Run Kraken binarisation locally:
 
