@@ -39,6 +39,8 @@ body {
 
 .tab-panel {
     margin-top: 1.5rem;
+    max-width: 100%;
+    min-width: 0;
 }
 
 h1 {
@@ -55,7 +57,8 @@ table.diff {
     font-family: monospace;
     border-collapse: collapse;
     width: 100%;
-    table-layout: fixed;
+    max-width: 100%;
+    table-layout: auto;
 }
 
 /* Hide difflib's navigation columns. */
@@ -63,10 +66,48 @@ table.diff {
     display: none;
 }
 
-/* Hide the corresponding colgroup columns used by difflib.HtmlDiff. */
-table.diff colgroup col:nth-child(1),
-table.diff colgroup col:nth-child(4) {
+table.diff colgroup:nth-of-type(1),
+table.diff colgroup:nth-of-type(4) {
     display: none;
+}
+
+/* Line number columns */
+table.diff colgroup:nth-of-type(2),
+table.diff colgroup:nth-of-type(5) {
+    width: 2.5rem;
+}
+
+/* Text columns */
+table.diff colgroup:nth-of-type(3),
+table.diff colgroup:nth-of-type(6) {
+    width: calc((100% - 5rem) / 2);
+}
+
+/* make the line-number cells compact */
+table.diff tbody td.diff_header {
+    width: 1%;
+    min-width: 2ch;
+    max-width: 4ch;
+    padding: 0 0.25rem;
+    text-align: right;
+    white-space: nowrap;
+}
+
+/* File header cells */
+table.diff thead th.diff_header {
+    text-align: left;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+/* Diff text cells */
+table.diff tbody td:not(.diff_header):not(.diff_next) {
+    width: 50%;
+    max-width: 0;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    word-break: break-word;
 }
 
 .diff_header {
@@ -126,8 +167,8 @@ function openTab(event, tabId) {
 <div class="header">
 <h1>Kraken segmentation diff</h1>
 <p>
-Comparing <code>/Users/ivo/projects/UFR/galaxy/kraken-OCR-wrappers/output/baseline_segmentation</code>
-against <code>/Users/ivo/projects/UFR/galaxy/kraken-OCR-wrappers/output/boxes_segmentation</code>.
+Comparing <code>output/baseline_segmentation</code>
+against <code>output/boxes_segmentation</code>.
 </p>
 </div>
 
@@ -142,13 +183,15 @@ against <code>/Users/ivo/projects/UFR/galaxy/kraken-OCR-wrappers/output/boxes_se
 
 <section id="native" class="tab-panel" style="display: block;">
 <h1>native</h1>
-<h2>input_bw_native.json</h2>
 
+        <h2>input_bw_native.json</h2>
+        <div class="diff-wrapper">
+        
     <table class="diff" id="difflib_chg_to0__top"
            cellspacing="0" cellpadding="0" rules="groups" >
         <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
         <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
-        <thead><tr><th class="diff_next"><br /></th><th colspan="2" class="diff_header">/Users/ivo/projects/UFR/galaxy/kraken-OCR-wrappers/output/baseline_segmentation/input_bw_native.json</th><th class="diff_next"><br /></th><th colspan="2" class="diff_header">/Users/ivo/projects/UFR/galaxy/kraken-OCR-wrappers/output/boxes_segmentation/input_bw_native.json</th></tr></thead>
+        <thead><tr><th class="diff_next"><br /></th><th colspan="2" class="diff_header">output/baseline_segmentation/input_bw_native.json</th><th class="diff_next"><br /></th><th colspan="2" class="diff_header">output/boxes_segmentation/input_bw_native.json</th></tr></thead>
         <tbody>
             <tr><td class="diff_next" id="difflib_chg_to0__0"><a href="#difflib_chg_to0__top">t</a></td><td class="diff_header" id="from0_1">1</td><td nowrap="nowrap"><span class="diff_sub">{"type":&nbsp;"baselines",&nbsp;"imagename":&nbsp;"/Users/ivo/projects/UFR/galaxy/kraken-OCR-wrappers/example_input/input_bw.png",&nbsp;"tex</span></td><td class="diff_next"><a href="#difflib_chg_to0__top">t</a></td><td class="diff_header" id="to0_1">1</td><td nowrap="nowrap"><span class="diff_add">{"type":&nbsp;"bbox",&nbsp;"imagename":&nbsp;null,&nbsp;"text_direction":&nbsp;"horizontal-lr",&nbsp;"script_detection":&nbsp;false,&nbsp;"lines":&nbsp;[{"id":&nbsp;"_208</span></td></tr>
             <tr><td class="diff_next"></td><td class="diff_header">></td><td nowrap="nowrap"><span class="diff_sub">t_direction":&nbsp;"horizontal-lr",&nbsp;"script_detection":&nbsp;false,&nbsp;"lines":&nbsp;[{"id":&nbsp;"_620cdaaa-7278-4c3c-bc14-e3c4d9dfb0ea",&nbsp;"tex</span></td><td class="diff_next"></td><td class="diff_header">></td><td nowrap="nowrap"><span class="diff_add">762f0-36c5-4149-8918-7216fdd28b96",&nbsp;"text":&nbsp;null,&nbsp;"base_dir":&nbsp;null,&nbsp;"imagename":&nbsp;null,&nbsp;"tags":&nbsp;null,&nbsp;"split":&nbsp;null,&nbsp;"reg</span></td></tr>
@@ -432,19 +475,22 @@ against <code>/Users/ivo/projects/UFR/galaxy/kraken-OCR-wrappers/output/boxes_se
             <tr><td class="diff_next"></td><td class="diff_header">></td><td nowrap="nowrap"><span class="diff_sub">orders":&nbsp;[],&nbsp;"language":&nbsp;null}</span></td><td class="diff_next"></td><td class="diff_header"></td><td nowrap="nowrap">&nbsp;</td></tr>
         </tbody>
     </table>
-
+        </div>
+    
 </section>
 
 
 <section id="alto" class="tab-panel" style="display: none;">
 <h1>alto</h1>
-<h2>input_bw_alto.xml</h2>
 
+        <h2>input_bw_alto.xml</h2>
+        <div class="diff-wrapper">
+        
     <table class="diff" id="difflib_chg_to1__top"
            cellspacing="0" cellpadding="0" rules="groups" >
         <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
         <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
-        <thead><tr><th class="diff_next"><br /></th><th colspan="2" class="diff_header">/Users/ivo/projects/UFR/galaxy/kraken-OCR-wrappers/output/baseline_segmentation/input_bw_alto.xml</th><th class="diff_next"><br /></th><th colspan="2" class="diff_header">/Users/ivo/projects/UFR/galaxy/kraken-OCR-wrappers/output/boxes_segmentation/input_bw_alto.xml</th></tr></thead>
+        <thead><tr><th class="diff_next"><br /></th><th colspan="2" class="diff_header">output/baseline_segmentation/input_bw_alto.xml</th><th class="diff_next"><br /></th><th colspan="2" class="diff_header">output/boxes_segmentation/input_bw_alto.xml</th></tr></thead>
         <tbody>
             <tr><td class="diff_next" id="difflib_chg_to1__0"></td><td class="diff_header" id="from1_5">5</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;&lt;Description&gt;</td><td class="diff_next"></td><td class="diff_header" id="to1_5">5</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;&lt;Description&gt;</td></tr>
             <tr><td class="diff_next"></td><td class="diff_header" id="from1_6">6</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;MeasurementUnit&gt;pixel&lt;/MeasurementUnit&gt;</td><td class="diff_next"></td><td class="diff_header" id="to1_6">6</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;MeasurementUnit&gt;pixel&lt;/MeasurementUnit&gt;</td></tr>
@@ -974,19 +1020,22 @@ against <code>/Users/ivo/projects/UFR/galaxy/kraken-OCR-wrappers/output/boxes_se
             <tr><td class="diff_next"></td><td class="diff_header" id="from1_243">243</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;&lt;/Layout&gt;</td><td class="diff_next"></td><td class="diff_header" id="to1_269">269</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;&lt;/Layout&gt;</td></tr>
         </tbody>
     </table>
-
+        </div>
+    
 </section>
 
 
 <section id="abbyy" class="tab-panel" style="display: none;">
 <h1>abbyy</h1>
-<h2>input_bw_abbyy.xml</h2>
 
+        <h2>input_bw_abbyy.xml</h2>
+        <div class="diff-wrapper">
+        
     <table class="diff" id="difflib_chg_to2__top"
            cellspacing="0" cellpadding="0" rules="groups" >
         <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
         <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
-        <thead><tr><th class="diff_next"><br /></th><th colspan="2" class="diff_header">/Users/ivo/projects/UFR/galaxy/kraken-OCR-wrappers/output/baseline_segmentation/input_bw_abbyy.xml</th><th class="diff_next"><br /></th><th colspan="2" class="diff_header">/Users/ivo/projects/UFR/galaxy/kraken-OCR-wrappers/output/boxes_segmentation/input_bw_abbyy.xml</th></tr></thead>
+        <thead><tr><th class="diff_next"><br /></th><th colspan="2" class="diff_header">output/baseline_segmentation/input_bw_abbyy.xml</th><th class="diff_next"><br /></th><th colspan="2" class="diff_header">output/boxes_segmentation/input_bw_abbyy.xml</th></tr></thead>
         <tbody>
             <tr><td class="diff_next" id="difflib_chg_to2__0"></td><td class="diff_header" id="from2_4">4</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;block&nbsp;blockType="Text"&gt;</td><td class="diff_next"></td><td class="diff_header" id="to2_4">4</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;block&nbsp;blockType="Text"&gt;</td></tr>
             <tr><td class="diff_next"></td><td class="diff_header" id="from2_5">5</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;text&gt;</td><td class="diff_next"></td><td class="diff_header" id="to2_5">5</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;text&gt;</td></tr>
@@ -1294,19 +1343,22 @@ against <code>/Users/ivo/projects/UFR/galaxy/kraken-OCR-wrappers/output/boxes_se
             <tr><td class="diff_next"></td><td class="diff_header" id="from2_99">99</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;&lt;/page&gt;</td><td class="diff_next"></td><td class="diff_header" id="to2_304">304</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;&lt;/page&gt;</td></tr>
         </tbody>
     </table>
-
+        </div>
+    
 </section>
 
 
 <section id="pagexml" class="tab-panel" style="display: none;">
 <h1>pagexml</h1>
-<h2>input_bw_pagexml.xml</h2>
 
+        <h2>input_bw_pagexml.xml</h2>
+        <div class="diff-wrapper">
+        
     <table class="diff" id="difflib_chg_to3__top"
            cellspacing="0" cellpadding="0" rules="groups" >
         <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
         <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
-        <thead><tr><th class="diff_next"><br /></th><th colspan="2" class="diff_header">/Users/ivo/projects/UFR/galaxy/kraken-OCR-wrappers/output/baseline_segmentation/input_bw_pagexml.xml</th><th class="diff_next"><br /></th><th colspan="2" class="diff_header">/Users/ivo/projects/UFR/galaxy/kraken-OCR-wrappers/output/boxes_segmentation/input_bw_pagexml.xml</th></tr></thead>
+        <thead><tr><th class="diff_next"><br /></th><th colspan="2" class="diff_header">output/baseline_segmentation/input_bw_pagexml.xml</th><th class="diff_next"><br /></th><th colspan="2" class="diff_header">output/boxes_segmentation/input_bw_pagexml.xml</th></tr></thead>
         <tbody>
             <tr><td class="diff_next"></td><td class="diff_header" id="from3_2">2</td><td nowrap="nowrap">&lt;PcGts&nbsp;xmlns="http://schema.primaresearch.org/PAGE/gts/pagecontent/2019-07-15"&nbsp;xmlns:xsi="http://www.w3.org/2001/XMLSche</td><td class="diff_next"></td><td class="diff_header" id="to3_2">2</td><td nowrap="nowrap">&lt;PcGts&nbsp;xmlns="http://schema.primaresearch.org/PAGE/gts/pagecontent/2019-07-15"&nbsp;xmlns:xsi="http://www.w3.org/2001/XMLSche</td></tr>
             <tr><td class="diff_next"></td><td class="diff_header">></td><td nowrap="nowrap">ma-instance"&nbsp;xsi:schemaLocation="http://schema.primaresearch.org/PAGE/gts/pagecontent/2019-07-15&nbsp;http://schema.primarese</td><td class="diff_next"></td><td class="diff_header">></td><td nowrap="nowrap">ma-instance"&nbsp;xsi:schemaLocation="http://schema.primaresearch.org/PAGE/gts/pagecontent/2019-07-15&nbsp;http://schema.primarese</td></tr>
@@ -1606,19 +1658,22 @@ against <code>/Users/ivo/projects/UFR/galaxy/kraken-OCR-wrappers/output/boxes_se
             <tr><td class="diff_next"></td><td class="diff_header" id="from3_162">162</td><td nowrap="nowrap">&lt;/PcGts&gt;</td><td class="diff_next"></td><td class="diff_header" id="to3_163">163</td><td nowrap="nowrap">&lt;/PcGts&gt;</td></tr>
         </tbody>
     </table>
-
+        </div>
+    
 </section>
 
 
 <section id="hocr" class="tab-panel" style="display: none;">
 <h1>hocr</h1>
-<h2>input_bw_hocr.html</h2>
 
+        <h2>input_bw_hocr.html</h2>
+        <div class="diff-wrapper">
+        
     <table class="diff" id="difflib_chg_to4__top"
            cellspacing="0" cellpadding="0" rules="groups" >
         <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
         <colgroup></colgroup> <colgroup></colgroup> <colgroup></colgroup>
-        <thead><tr><th class="diff_next"><br /></th><th colspan="2" class="diff_header">/Users/ivo/projects/UFR/galaxy/kraken-OCR-wrappers/output/baseline_segmentation/input_bw_hocr.html</th><th class="diff_next"><br /></th><th colspan="2" class="diff_header">/Users/ivo/projects/UFR/galaxy/kraken-OCR-wrappers/output/boxes_segmentation/input_bw_hocr.html</th></tr></thead>
+        <thead><tr><th class="diff_next"><br /></th><th colspan="2" class="diff_header">output/baseline_segmentation/input_bw_hocr.html</th><th class="diff_next"><br /></th><th colspan="2" class="diff_header">output/boxes_segmentation/input_bw_hocr.html</th></tr></thead>
         <tbody>
             <tr><td class="diff_next" id="difflib_chg_to4__0"></td><td class="diff_header" id="from4_6">6</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;meta&nbsp;name="ocr-capabilities"&nbsp;content="ocr_page&nbsp;ocrx_block&nbsp;ocr_line&nbsp;ocrx_word&nbsp;ocrp_poly"/&gt;</td><td class="diff_next"></td><td class="diff_header" id="to4_6">6</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;meta&nbsp;name="ocr-capabilities"&nbsp;content="ocr_page&nbsp;ocrx_block&nbsp;ocr_line&nbsp;ocrx_word&nbsp;ocrp_poly"/&gt;</td></tr>
             <tr><td class="diff_next"></td><td class="diff_header" id="from4_7">7</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;&lt;/head&gt;</td><td class="diff_next"></td><td class="diff_header" id="to4_7">7</td><td nowrap="nowrap">&nbsp;&nbsp;&nbsp;&nbsp;&lt;/head&gt;</td></tr>
@@ -1870,7 +1925,8 @@ against <code>/Users/ivo/projects/UFR/galaxy/kraken-OCR-wrappers/output/boxes_se
             <tr><td class="diff_next"></td><td class="diff_header" id="from4_104">104</td><td nowrap="nowrap">&lt;/html&gt;</td><td class="diff_next"></td><td class="diff_header" id="to4_102">102</td><td nowrap="nowrap">&lt;/html&gt;</td></tr>
         </tbody>
     </table>
-
+        </div>
+    
 </section>
 
 

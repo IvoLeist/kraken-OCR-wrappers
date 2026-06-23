@@ -33,6 +33,8 @@ body {
 
 .tab-panel {
     margin-top: 1.5rem;
+    max-width: 100%;
+    min-width: 0;
 }
 
 h1 {
@@ -49,7 +51,8 @@ table.diff {
     font-family: monospace;
     border-collapse: collapse;
     width: 100%;
-    table-layout: fixed;
+    max-width: 100%;
+    table-layout: auto;
 }
 
 /* Hide difflib's navigation columns. */
@@ -57,10 +60,48 @@ table.diff {
     display: none;
 }
 
-/* Hide the corresponding colgroup columns used by difflib.HtmlDiff. */
-table.diff colgroup col:nth-child(1),
-table.diff colgroup col:nth-child(4) {
+table.diff colgroup:nth-of-type(1),
+table.diff colgroup:nth-of-type(4) {
     display: none;
+}
+
+/* Line number columns */
+table.diff colgroup:nth-of-type(2),
+table.diff colgroup:nth-of-type(5) {
+    width: 2.5rem;
+}
+
+/* Text columns */
+table.diff colgroup:nth-of-type(3),
+table.diff colgroup:nth-of-type(6) {
+    width: calc((100% - 5rem) / 2);
+}
+
+/* make the line-number cells compact */
+table.diff tbody td.diff_header {
+    width: 1%;
+    min-width: 2ch;
+    max-width: 4ch;
+    padding: 0 0.25rem;
+    text-align: right;
+    white-space: nowrap;
+}
+
+/* File header cells */
+table.diff thead th.diff_header {
+    text-align: left;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+/* Diff text cells */
+table.diff tbody td:not(.diff_header):not(.diff_next) {
+    width: 50%;
+    max-width: 0;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    word-break: break-word;
 }
 
 .diff_header {

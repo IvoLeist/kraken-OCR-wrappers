@@ -118,7 +118,13 @@ def make_file_diff_section(
         numlines=3,
     )
 
-    return f"<h2>{safe_name}</h2>\n{table}\n"
+    # return f"<h2>{safe_name}</h2>\n{table}\n"
+    return f"""
+        <h2>{safe_name}</h2>
+        <div class="diff-wrapper">
+        {table}
+        </div>
+    """
 
 
 def make_tab_panel(
