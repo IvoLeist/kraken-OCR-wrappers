@@ -13,7 +13,7 @@
 <iframe
   id="segmentation-diff-frame"
   class="segmentation-diff-frame"
-  src="../segmentation-diff.html"
+  src="./segmentation-diff.html"
   title="Kraken segmentation diff"
   allowfullscreen
   allow="fullscreen"
