@@ -1,6 +1,8 @@
 [project]
 site_name = "Kraken OCR wrappers"
 site_url = "https://ivoleist.github.io/kraken-OCR-wrappers/"
+repo_url = "https://github.com/IvoLeist/kraken-OCR-wrappers"
+repo_name = "IvoLeist/kraken-OCR-wrappers"
 extra_css = ["stylesheets/extra.css"]
 copyright = """
 © 2026 Ivo Christopher Leist. This collection of
